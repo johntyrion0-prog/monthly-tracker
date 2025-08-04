@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Estimator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header d-flex justify-content-between align-items-center">
+            <img src="/assets/cognizant-logo.png" alt="Cognizant Logo">
+            <div class="user-info">
+                <span>Welcome, <strong id="username-display"></strong></span>
+                <button type="button" class="btn btn-outline-primary btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#userChangePasswordModal">
+                    🔒 Change Password
+                </button>
+                <button type="button" id="logout-btn" class="btn btn-outline-secondary btn-sm ms-2">Logout</button>
+            </div>
+        </div>
+        <h1>Monthly Tracker</h1>
+
+        <!-- Security Warning Banner for Users -->
+        <div id="user-security-warning" class="alert alert-warning alert-dismissible fade show" role="alert" style="display: none;">
+            <h6><i class="fas fa-exclamation-triangle"></i> <strong>Password Change Required</strong></h6>
+            <p class="mb-2">You are using a temporary password. For security, please change it now.</p>
+            <p class="mb-0">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#userChangePasswordModal">
+                    Change Password Now
+                </button>
+            </p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form id="controls-form" class="form-inline">
+                    <!-- Month/Year Selector -->
+                    <div class="form-group mx-3">
+                        <label for="month-select" class="mr-2">Month:</label>
+                        <select id="month-select" class="form-control"></select>
+                    </div>
+                    <div class="form-group mr-3">
+                        <label for="year-select" class="mr-2">Year:</label>
+                        <select id="year-select" class="form-control"></select>
+                    </div>
+                    <div class="vertical-divider"></div>
+                    <!-- Working Days -->
+                    <div class="form-group mx-3">
+                        <label for="monthly-working-days" class="mr-2">Working Days:</label>
+                        <input type="number" class="form-control" id="monthly-working-days" style="width: 80px;">
+                    </div>
+                </form>
+                
+                <!-- Resource Leaves Section -->
+                <hr class="my-3">
+                <h5>Resource Leaves</h5>
+                <div id="resource-leaves-container">
+                    <!-- Leave input rows will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Table -->
+        <div class="summary-section">
+            <h4>Summary for <span id="summary-month-year"></span></h4>
+            <table class="table table-bordered mt-3">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Resource Name</th>
+                        <th>Working Days</th>
+                        <th>Leaves</th>
+                        <th>Billable Days</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="summary-table-body">
+                    <!-- Summary rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-right mt-3">
+             <button type="button" id="update-all-btn" class="btn btn-success btn-lg">Update All</button>
+        </div>
+    </div>
+
+    <!-- User Change Password Modal -->
+    <div class="modal fade" id="userChangePasswordModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🔒 Change Your Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <strong>Security Notice:</strong> Please choose a strong password with at least 6 characters for your account security.
+                    </div>
+                    <form id="user-change-password-form">
+                        <div class="mb-3">
+                            <label for="user-current-password" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="user-current-password" placeholder="Enter current password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="user-new-password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="user-new-password" placeholder="Enter new password (min 6 characters)" required>
+                            <div class="form-text">Password strength: <span id="user-password-strength">Not set</span></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="user-confirm-password" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="user-confirm-password" placeholder="Confirm new password" required>
+                        </div>
+                    </form>
+                    <div id="user-change-password-error" class="alert alert-danger" style="display: none;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="user-change-password-btn">Change Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
